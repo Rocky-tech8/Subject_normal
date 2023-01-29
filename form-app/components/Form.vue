@@ -5,7 +5,7 @@
       <dl>
         <dt>氏名【必須】</dt>
         <dd>
-            <input type="text" name="name" size="7" maxlength="51" required v-model="formData.name">
+            <input type="text" name="name" size="7" maxlength="50" required v-model="formData.name">
         </dd>
         <dt>性別【必須】</dt>
         <dd>
@@ -23,7 +23,7 @@
         </dd>
         <dt>住所【必須】</dt>
         <dd>
-          <input type="text" name="address" maxlength="201" required v-model="formData.address">
+          <input type="text" name="address" maxlength="200" required v-model="formData.address">
         </dd>
         <dt>電話番号【任意】</dt>
         <dd>
@@ -31,7 +31,7 @@
         </dd>
         <dt>メールアドレス【任意】</dt>
         <dd>
-          <input type="text" name="email" maxlength="201" v-model="formData.email">
+          <input type="text" name="email" maxlength="200" v-model="formData.email">
         </dd>
         <dt>お問い合わせの種類【必須】</dt>
         <dd>
@@ -46,7 +46,7 @@
         </dd>
         <dt>相談内容【必須】</dt>
         <dd>
-            <textarea name="question2" rows="10" cols="50" maxlength="1001" required v-model="formData.question2"></textarea>
+            <textarea name="question2" rows="10" cols="50" maxlength="1000" required v-model="formData.question2"></textarea>
         </dd>
       </dl>
       <input type="submit" value="送信" :disabled="!isSubmitButtom">
