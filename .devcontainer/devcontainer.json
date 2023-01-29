@@ -1,0 +1,16 @@
+{
+    "name": "Node.js version 18 & TypeScript",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/work",
+    "settings": {
+      "eslint.workingDirectories": [
+        { "mode": "auto" }
+      ]
+    },
+    "extensions": [
+		"octref.vetur",
+		"mhutchie.git-graph"
+	],
+	"remoteUser": "root"
+}
