@@ -35,18 +35,18 @@
         </dd>
         <dt>お問い合わせの種類【必須】</dt>
         <dd>
-          <select name="question1" required v-model="formData.question1">
-            <option value="0">新規お取引のご相談</option>
-            <option value="1">会社資料請求</option>
-            <option value="2">セミナーのご相談</option>
-            <option value="3">プログラムのご相談</option>
-            <option value="4">広報・取材依頼などのお問い合わせ</option>
-            <option value="5">その他</option>
-        </select>
+            <select name="question1" required v-model="formData.question1">
+                <option value="0">新規お取引のご相談</option>
+                <option value="1">会社資料請求</option>
+                <option value="2">セミナーのご相談</option>
+                <option value="3">プログラムのご相談</option>
+                <option value="4">広報・取材依頼などのお問い合わせ</option>
+                <option value="5">その他</option>
+            </select>
         </dd>
         <dt>相談内容【必須】</dt>
         <dd>
-          <textarea name="question2" rows="10" cols="50" maxlength="1001" required v-model="formData.question2"></textarea>
+            <textarea name="question2" rows="10" cols="50" maxlength="1001" required v-model="formData.question2"></textarea>
         </dd>
       </dl>
       <input type="submit" value="送信" :disabled="!isSubmitButtom">
@@ -76,32 +76,41 @@ export default {
         const responseText = ref("")
 
         // 送信処理
-        const submit = async function() {
+        const submit = async function () {
             // 送信ボタン無効化 & 結果を空に
             this.isSubmitButtom = false
             this.responseText = ""
 
-            // [DEBUG]中身確認
-            console.log(this.formData)
+            // 送信処理
+            const { data, pending, error, refresh } = await useFetch('/api/submit/', {
+                method: "POST",
+                body: this.formData
+            })
 
+            // 送信結果確認
+            if (error.value) {
+                // エラーの場合
+                this.responseText = "エラーが発生しました"
+            } else {
+                // 成功の場合
+                this.formData = {
+                    name: "",
+                    gender: 2,
+                    birthday: "",
+                    postNumber: "",
+                    address: "",
+                    phone: "",
+                    email: "",
+                    question1: 0,
+                    question2: ""
+                }
 
+                // 結果を表示
+                this.responseText = "お問合せありがとうございます。内容を送信しました。"
+            }
 
             // 送信ボタン有効化 & 入力内容削除
             this.isSubmitButtom = true
-            this.formData = {
-                name: "",
-                gender: 2,
-                birthday: "",
-                postNumber: "",
-                address: "",
-                phone: "",
-                email: "",
-                question1: 0,
-                question2: ""
-            }
-            
-            // 結果を表示
-            this.responseText = "お問合せありがとうございます。内容を送信しました。"
         }
 
         return {
@@ -110,7 +119,6 @@ export default {
             responseText,
             submit
         }
-
-    },
-}
+    }
+};
 </script>
