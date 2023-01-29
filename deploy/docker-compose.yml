@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app:
+    build: ./../form-app
+    command: sh /app/start.sh
+    ports:
+      - 3000:3000
+  db:
+    build: ./mysql
+    volumes:
+        - ./db/db:/var/lib/mysql
+        - ./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    environment:
+        MYSQL_DATABASE: sampledb
+        MYSQL_USER: dbuser
+        MYSQL_PASSWORD: 1234
+        MYSQL_ROOT_PASSWORD: 1234
